@@ -22,6 +22,10 @@ Companion to [reference §10](../arpa-legacy-protocol-reference.md#10-security-a
 - Raw HTTP callbacks.
 - Narratives from heirs or solicitors—only **predicate satisfaction** tied to commitments.
 
+## Implementation lifecycle (v1)
+
+- Vault **implementations are immutable** ([ADR 001](../adr/001-v1-custody.md)): no upgrade proxy in the shipped v1 pattern; newer versions are separate deploys. Users who never migrate retain **prior** bytecode behaviour under their commitment.
+
 ## v1-focused risks
 
 | Risk | Mitigation direction (design) |
@@ -30,7 +34,7 @@ Companion to [reference §10](../arpa-legacy-protocol-reference.md#10-security-a
 | Policy downgraded after partial trigger | Version locks / hash timelines (reference §10) |
 | Two policies drain same ERC-20 | Single conflict strategy from MVP scope ([v1-mvp §](../scope/v1-mvp.md#conflict-resolution)) |
 | Owner rug-pull before trigger | Transparent policy semantics; disclosures in UI—not a protocol “bug” |
-| Executor censorship | Anyone can call if public; document liveness expectations |
+| Executor censorship | Hybrid `execute`: permissionless phases where manifest allows ([ADR 001](../adr/001-v1-custody.md)); named executors where attestations gate; document liveness / keeper incentives |
 
 ## Personal data, DIDs, agents (README language)
 

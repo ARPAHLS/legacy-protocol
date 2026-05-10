@@ -1,6 +1,6 @@
 # Architecture overview
 
-This document maps the [reference specification](../arpa-legacy-protocol-reference.md) to deployable modules. It is descriptive until [ADR 001](../adr/001-v1-custody.md) is **Accepted**.
+This document maps the [reference specification](../arpa-legacy-protocol-reference.md) to deployable modules. [ADR 001](../adr/001-v1-custody.md) is **Accepted** (path A — vault custody); this overview tracks that v1 shape; path B/C remain future options in the reference narrative.
 
 ## High-level diagram (logical)
 
@@ -10,7 +10,7 @@ flowchart LR
     O[Owner keys]
   end
   subgraph core [Core on-chain]
-    V[Vault or account module]
+    V[Vault (v1 path A)]
     P[Policy commitment]
     T[Trigger adapters]
     E[Execution / asset router]
@@ -31,8 +31,8 @@ flowchart LR
 
 | Module | Responsibility | v1 note |
 |--------|----------------|---------|
-| **Core** | Lifecycle, replay protection, conflict arbitration hooks | Tied to custody choice in ADR 001 |
-| **Vault** | Escrow custody API (if path A) | See [legacy-vault-v1.md](../contracts/legacy-vault-v1.md) |
+| **Core** | Lifecycle, replay protection, conflict arbitration hooks | Vault-shaped in v1 per [ADR 001](../adr/001-v1-custody.md) |
+| **Vault** | Escrow custody API (v1) | [legacy-vault-v1.md](../contracts/legacy-vault-v1.md); factory + clones per user |
 | **Triggers — time / block** | Eligibility from `block.timestamp` or height | First concrete adapter to implement |
 | **Triggers — attestation** | EIP-712 verify, registries, freshness | After time-based path proven |
 | **Triggers — oracle** | Feed snapshots, staleness | After attestation or in parallel with clear interfaces |

@@ -11,7 +11,7 @@ Maps product behaviours to the [reference spec](../arpa-legacy-protocol-referenc
 | B-003 | Time-based trigger arms and fires at configured boundary | §4.3 | deferred |
 | B-004 | Execute ERC-20 transfer to beneficiary per distribution | §4.4, §9 | deferred |
 | B-005 | Execute ERC-721 `safeTransferFrom` with failure mode (skip vs abort) | §4.4 | deferred |
-| B-006 | Single chosen conflict rule applied when two claims overlap | §5.2, [v1-mvp](../scope/v1-mvp.md) | deferred |
+| B-006 | **Global priority** (+ tie-break) when two claims overlap | §5.2, [v1-mvp](../scope/v1-mvp.md), [ADR 001](../adr/001-v1-custody.md) | deferred |
 | B-007 | Replay-safe execution id / nonce (no double drain) | §15, §10 | deferred |
 | B-008 | Reentrancy resistance on external token callbacks | §4.4, §10 | deferred |
 | B-009 | Emit core lifecycle events per [events-v1](../indexing/events-v1.md) | §13 | deferred |

@@ -2,6 +2,6 @@
 
 | ADR | Title | Status |
 |-----|--------|--------|
-| [001](001-v1-custody.md) | v1 custody and authority model | Proposed |
+| [001](001-v1-custody.md) | v1 custody and authority model | **Accepted** (2026-05-09) |
 
-When an ADR is accepted, note the decision date in its header and optionally link from [architecture/overview.md](../architecture/overview.md).
+For each ADR: status and date live in the ADR header table; [architecture/overview.md](../architecture/overview.md) stays aligned with Accepted decisions.

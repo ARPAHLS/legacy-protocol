@@ -2,10 +2,10 @@
 
 | Field | Value |
 |-------|--------|
-| Status | Proposed |
-| Date | — |
-| Deciders | ARPA Legacy Protocol maintainers |
-| References | [Reference spec §4.1](../arpa-legacy-protocol-reference.md#41-custody-and-authority-one-primary-pattern-per-deployment), [§4.4–4.5](../arpa-legacy-protocol-reference.md#44-execution-plane), [v1 MVP scope](../scope/v1-mvp.md), [Vault v1 spec](../contracts/legacy-vault-v1.md), [Trust boundaries v1](../security/trust-boundaries-v1.md) |
+| Status | **Accepted** |
+| Date | 2026-05-09 |
+| Deciders | ARPA Legacy Protocol maintainers / project stewards; **rosspeili** |
+| References | [Reference spec §4.1](../arpa-legacy-protocol-reference.md#41-custody-and-authority-one-primary-pattern-per-deployment), [§4.4–4.5](../arpa-legacy-protocol-reference.md#44-execution-plane), [v1 MVP scope](../scope/v1-mvp.md), [Vault v1 spec](../contracts/legacy-vault-v1.md), [Trust boundaries v1](../security/trust-boundaries-v1.md), [Ideal vs MVP asset coverage](../scope/ideal-vs-mvp-asset-coverage.md) |
 
 ## Context (reference + product)
 
@@ -28,7 +28,7 @@ The [reference spec §4.1](../arpa-legacy-protocol-reference.md#41-custody-and-a
 - **Modular smart accounts** (e.g. plugin/module ecosystems, Safe modules): policy as an **optional module** with upgrade and timelock discipline—aligns with reference §6 (recovery, rotation).  
 - **Foundry** for implementation and invariant tests ([README roadmap](../../README.md#product-roadmap-in-priority-order)).  
 - **EIP-712** policy and attestation signing ([reference §12](../arpa-legacy-protocol-reference.md#12-interoperability-with-existing-evm-standards)) when manifests move off-chain.  
-- **Explicit upgrade stance** (immutable vs proxy): decide per deployment; document in [trust boundaries](../security/trust-boundaries-v1.md) and vault spec.
+- **Upgrade stance:** v1 is **immutable implementation** (no upgrade proxy); see [recorded decisions](#recorded-decisions-supplementary-qa) and [trust boundaries](../security/trust-boundaries-v1.md). Future versions may revisit proxy patterns under a new ADR if needed.
 
 **Security note (reference §4.1):** each pattern shifts MEV, censorship, and **who can race** `execute`—document executor model in the vault or account spec.
 
@@ -38,21 +38,33 @@ The [reference spec §4.1](../arpa-legacy-protocol-reference.md#41-custody-and-a
 - **B — Smart-account module:** policy embedded in **ERC-4337-style** (or equivalent) account logic; **single locus** for “all account-held assets” subject to module rules; no monolithic `LegacyVault` holding everyone’s tokens.  
 - **C — Hybrid / choreographed allowances:** split **vault-held** vs **wallet-held** cohorts with **non-ambiguous** delegation (reference: **must** forbid partial-authority ambiguity). Typically: **limited, time-bounded, or revocable** allowances to an executor—**higher** user-error and griefing surface.
 
-## Proposed v1 decision (for maintainer acceptance)
+## Accepted v1 decision
 
-**Select path A — Vault custody** as the **first shipped** on-chain track, with **explicit product documentation**:
+**Selected:** **A — Vault custody (v1)** as the **first shipped** on-chain track, with **explicit product documentation**:
 
-- **In scope for v1 execution:** assets **deposited** into the vault (and native ETH if the design supports explicit deposit accounting per [v1 MVP](../scope/v1-mvp.md)).  
-- **Out of scope for v1 unless separately specified:** pulling **unspecified** EOA residue after death with no prior deposit or delegation.  
+- **In scope for v1 execution:** assets **deposited** into the vault (including **native ETH** held by the vault with explicit accounting—see [recorded decisions](#recorded-decisions-supplementary-qa) below).  
+- **Out of scope for v1 unless separately specified:** pulling **unspecified** EOA residue after death with no prior deposit or delegation; universal sweep of third-party staking/lending/vault positions without **connectors** or prior commitment—see [Ideal vs MVP asset coverage](../scope/ideal-vs-mvp-asset-coverage.md).  
 - **“Active use” guidance:** users who want DEX/event liquidity keep **operational balances outside** the vault **or** withdraw from vault when needed; **estate** balances stay inside for deterministic triggers.  
-- **Path B** is the **documented successor** for deployments that want **one smart account** holding both day-to-day and succession logic (new spec file when ADR is extended or superseded).  
+- **Path B** remains the **documented successor** for deployments that want **one smart account** holding both day-to-day and succession logic (new spec when ADR is extended or superseded).  
 - **Path C** remains **deferred** until a concrete **allowance + scope + revocation** story is specified and audited—reference requirement on **no ambiguous authority**.
 
-**Selected (record when accepted):** **A — Vault custody (v1)** — *or amend to B/C with rationale below.*
+### Recorded decisions (supplementary Q&A)
 
-_Date when accepted:_ —  
+The following narrows implementation and product wording; details live in [v1 MVP](../scope/v1-mvp.md) and [legacy-vault-v1](../contracts/legacy-vault-v1.md).
 
-_If rejecting A, document rationale and supersede legacy-vault spec as needed._
+| Topic | Decision |
+|-------|-----------|
+| **Native ETH vs WETH in vault** | **Native ETH supported in-vault** for policies like “send 99% of ETH after trigger,” with a **deployment-defined gas reserve** (minimum retained for further execution txs). Policies cannot move ETH that was **never** deposited into the vault. **WETH** remains a normal ERC-20 transfer path alongside native handling where the implementation exposes both. |
+| **Conflict resolution** | **Global policy priority** with a deterministic tie-break (e.g. lower `policyId` or lexical `executionId`)—single rule for v1; document exact ordering in vault spec. |
+| **Who may call `execute`** | **Hybrid model:** owner may execute where the state machine allows (e.g. early voluntary payout windows); **named executors** when predicates require attestations / liveness; **permissionless** calls where the manifest and state machine declare it safe (e.g. pure time lock fully satisfied)—see vault spec gates. |
+| **Upgrades** | **Immutable implementation** deployments for a given vault version (**no proxy** in v1 ship); **new versions** deployed separately; users **migrate** only when able and willing; **old deployments keep executing** under their committed policy. |
+| **`policyRoot` encoding (v1)** | **Single commitment digest** (hash of canonical serialized manifest / policy envelope) for v1 simplicity; Merkle proofs are **deferred** until calldata gas or partial on-chain manifests justify them. |
+| **Vault topology (v1 direction)** | **Per-user vault instance** via **factory-deployed clones** sharing one **immutable implementation**—clear balance isolation versus one multi-tenant vault. Soulbound NFTs (**optional**) are identity/registry hints, **not** a substitute for a vault contract boundary. |
+| **Cooling-off** | **Configurable per policy deployment:** delay after eligibility before irreversible payouts, so owners can disprove false positives (e.g. bad attestation). **Non-zero default** recommended for **attestation-linked** payouts; pure time-delay policies may allow **zero** cooling-off only if product accepts the risk. |
+| **Batch failures (e.g. one NFT)** | **Non-blocking batches:** retry/skip semantics per line item with a **policy-defined max attempts**, then skip or abort **that branch** without blocking unrelated assets—see vault spec / behavior matrix. |
+| **Marketing vs chain** | “All assets everywhere” is a **north star** needing **connectors + prior commitment**; v1 sells **vault-committed assets** honestly—see [Ideal vs MVP asset coverage](../scope/ideal-vs-mvp-asset-coverage.md). |
+
+_If changing any row, either amend this ADR with date + rationale or supersede with a new ADR._
 
 ## Consequences
 
@@ -77,8 +89,9 @@ _If rejecting A, document rationale and supersede legacy-vault spec as needed._
 
 ## Follow-up actions
 
-1. Accept this ADR (Status **Accepted**, date, **Selected** filled) when maintainers agree.  
+1. ~~Accept this ADR~~ **Done** (Accepted 2026-05-09).  
 2. Update [architecture/overview.md](../architecture/overview.md) for **path A** diagram (vault + watchers + manifests).  
 3. Add a short **User guide** subsection (README or `docs/scope/user-expectations-hot-vs-vault.md`) summarizing **vault vs operational wallet** so marketing and implementation stay aligned.  
 4. Optional: draft **ADR 002 — smart-account policy module (path B)** without blocking v1 vault delivery.  
-5. Reject or archive superseded hybrid sketches under [`drafts/`](../../drafts/README.md) if useful.
+5. Optional: **`policyRoot`**, **execute** gates, **cooling-off**, **partial failure**: cross-check [legacy-vault-v1](../contracts/legacy-vault-v1.md), [behavior matrix](../testing/behavior-matrix.md), [events](../indexing/events-v1.md) when Solidity ships.  
+6. Reject or archive superseded hybrid sketches under [`drafts/`](../../drafts/README.md) if useful.

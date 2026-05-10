@@ -47,7 +47,7 @@ What stays constant is sovereignty of intent before the storm. You set beneficia
 
 ## For builders
 
-Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): ADR, architecture, MVP scope, events, policy JSON schema, behaviour matrix, vault spec), and non-canonical sketches ([`drafts/`](drafts/README.md)).
+Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), and non-canonical sketches ([`drafts/`](drafts/README.md)).
 
 Coming: Solidity contracts (Foundry layout planned), machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
 
@@ -69,13 +69,13 @@ Use **[CONTRIBUTING.md](CONTRIBUTING.md)** for pull requests and community norms
 
 ## Product roadmap (in priority order)
 
-1. **Freeze v1 custody model** ← *blocks everything below;* pick vault vs smart-account module (or documented hybrid) in the reference spec and mirror it in the first Solidity layout.
+1. **~~Freeze v1 custody model~~ → Done:** [ADR 001](docs/adr/001-v1-custody.md) **Accepted** — vault custody (path A), immutable v1 implementations, hybrid `execute` model. Next: mirror in `contracts/` (Foundry) and behavior tests.
 
 2. **Ship `contracts/`** — Foundry (or Hardhat) with unit and invariant tests mapped to behaviors in [`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md).
 
 3. **Authoring tooling** — policy manifests, CLI/SDK for commitments and regression fixtures.
 
-4. **Testnet deployment and operations** — monitoring, upgrade stance, coordinated disclosure via [SECURITY.md](SECURITY.md).
+4. **Testnet deployment and operations** — monitoring, (**v1:** immutable bytecode per deployment; migrations explicit), coordinated disclosure via [SECURITY.md](SECURITY.md).
 
 5. **External audit** — then sober mainnet-adjacent or high-value use only after reviewers sign off.
 

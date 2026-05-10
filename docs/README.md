@@ -7,6 +7,7 @@ Authoritative narrative spec: [**arpa-legacy-protocol-reference.md**](arpa-legac
 | Custody decision (v1) | [adr/001-v1-custody.md](adr/001-v1-custody.md) |
 | System shape | [architecture/overview.md](architecture/overview.md) |
 | MVP scope | [scope/v1-mvp.md](scope/v1-mvp.md) |
+| Ideal vs MVP asset coverage (connectors / north star) | [scope/ideal-vs-mvp-asset-coverage.md](scope/ideal-vs-mvp-asset-coverage.md) |
 | Hot wallet vs vault (expectations) | [scope/user-expectations-hot-vs-vault.md](scope/user-expectations-hot-vs-vault.md) |
 | Trust & threats (v1) | [security/trust-boundaries-v1.md](security/trust-boundaries-v1.md) |
 | Events & indexing | [indexing/events-v1.md](indexing/events-v1.md) |

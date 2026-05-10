@@ -14,8 +14,8 @@ Implements the direction in [reference §4.2](../arpa-legacy-protocol-reference.
 
 The JSON file is **not** automatically what is hashed. You must document in [legacy-vault-v1.md](../contracts/legacy-vault-v1.md):
 
-1. Field order and types for `keccak256(abi.encode(...))` or Merkle leaf layout.
-2. Whether **full manifest** or **Merkle root** is committed.
+1. Field order and types for **`keccak256(abi.encode(...))`** (or chosen hash) of the canonical envelope; Merkle layouts are **out of scope for v1** unless a future ADR adds them ([ADR 001](../adr/001-v1-custody.md)).
+2. ~~Whether full manifest or Merkle root~~ **v1:** single **digest** commitment over canonical serialized policy/manifest envelope.
 3. How `distribution` basis points sum to 10000 per cohort (validation rules).
 
 ## Extensibility

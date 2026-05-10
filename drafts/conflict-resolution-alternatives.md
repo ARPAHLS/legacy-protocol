@@ -1,6 +1,8 @@
 # Draft: conflict resolution alternatives
 
-Source: [reference spec §5.2](../docs/arpa-legacy-protocol-reference.md#52-overlapping-assets). **Pick one for v1** in [v1 MVP scope](../docs/scope/v1-mvp.md) and delete or archive the rest.
+**v1 resolution (frozen):** [ADR 001](../docs/adr/001-v1-custody.md) + [v1 MVP](../docs/scope/v1-mvp.md) use **global policy priority** with a deterministic tie-break (closest to Option A below; tie-break specifics in the manifest / vault spec).
+
+Source: [reference spec §5.2](../docs/arpa-legacy-protocol-reference.md#52-overlapping-assets). This draft is **non-canonical** and kept for comparison / future reconsideration.
 
 ## Option A — Global strict priority
 

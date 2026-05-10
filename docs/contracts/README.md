@@ -4,6 +4,6 @@ Formal Solidity lives under `contracts/` when the repository adds Foundry. Until
 
 | Spec | Status |
 |------|--------|
-| [legacy-vault-v1.md](legacy-vault-v1.md) | Draft — pending [ADR 001](../adr/001-v1-custody.md) |
+| [legacy-vault-v1.md](legacy-vault-v1.md) | Draft spec (pre-Solidity); tracks **Accepted** [ADR 001](../adr/001-v1-custody.md) path A |
 
 Cross-links: [architecture](../architecture/overview.md) · [reference spec](../arpa-legacy-protocol-reference.md) · [drafts brainstorm](../../drafts/contracts/vault-api-brainstorm.md).

@@ -66,7 +66,7 @@ Modular **design** separates these concerns for implementation and testing:
 
 | Layer | Description |
 |-------|-------------|
-| **On-chain minimized** | Contract stores `policyId → policyRoot` (Merkle or SNARK-friendly commitment) with off-chain manifest and proofs at execution. |
+| **On-chain minimized** | Contract stores `policyId → policyRoot` (Merkle, single full-manifest digest, or SNARK-friendly commitment—**v1 commits a digest** over canonical serialization per [ADR 001](adr/001-v1-custody.md)) with off-chain manifest and supplied envelope at execution. |
 | **On-chain expansive** | Explicit structs for small policies; higher audibility; higher gas. |
 
 The **protocol specification** for a given release **defines** replay protection, version bumps, revocation precedence, hash algorithms, and canonical serialization so independent implementers stay compatible.
@@ -110,6 +110,8 @@ For overlapping cohorts, pick **one** deterministic rule system, for example:
 - **Global priority list** among policies, or  
 - **First eligible by `(priority, timestamp)`** with an explicit tie-break, or  
 - **Disjoint cohort keys** enforced at authoring time.
+
+**v1:** global policy priority plus explicit tie-break—[ADR 001](adr/001-v1-custody.md) and [v1 MVP scope](scope/v1-mvp.md).
 
 Define **dust**, **skipped transfers**, and **blacklisted recipients**.
 
@@ -203,11 +205,11 @@ Illustrative events: `PolicyUpdated`, `TriggerSatisfied`, `ExecutionStarted`, `E
 
 ## 14. Open research and roadmap topics
 
-1. Canonical **v1 custody** choice and upgrade story.  
+1. ~~Canonical **v1 custody** choice and upgrade story.~~ **Resolved:** [ADR 001](adr/001-v1-custody.md) — vault custody (path A), **immutable** v1 implementation; document supersession when path B ships.  
 2. **Inactivity** definition across EOA vs smart-account UX.  
 3. **Oracle adapter** surface for multi-chain deployments ([CAIP](https://github.com/ChainAgnostic/CAIPs)-style references if needed).  
 4. **Indexing** event schema for subgraphs and explorers.  
-5. **Proxy vs immutable** deployment tradeoffs.
+5. **Upgrade patterns** beyond v1 immutable vaults (proxies, module registries)—only if future ADRs introduce them.
 
 ---
 
@@ -247,6 +249,7 @@ Structured artifacts that narrow the narrative spec into buildable and auditable
 - **ADR (custody):** [docs/adr/001-v1-custody.md](adr/001-v1-custody.md)
 - **Architecture:** [docs/architecture/overview.md](architecture/overview.md)
 - **v1 MVP scope:** [docs/scope/v1-mvp.md](scope/v1-mvp.md)
+- **Ideal vs MVP asset coverage (north star vs vault-only):** [docs/scope/ideal-vs-mvp-asset-coverage.md](scope/ideal-vs-mvp-asset-coverage.md)
 - **Trust boundaries:** [docs/security/trust-boundaries-v1.md](security/trust-boundaries-v1.md)
 - **Events / indexing:** [docs/indexing/events-v1.md](indexing/events-v1.md)
 - **Policy manifest:** [docs/schemas/policy-manifest.md](schemas/policy-manifest.md) · [docs/schemas/policy-manifest-draft.json](schemas/policy-manifest-draft.json)
