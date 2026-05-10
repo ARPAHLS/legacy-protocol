@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "arpa-legacy-protocol:policy-manifest-draft@v0.1.0",
+  "title": "ARPA Legacy Protocol — policy manifest (draft)",
+  "description": "Portable policy description; on-chain commitment is typically keccak256(abi.encodePacked(...)) or similar — define canonical encoding in contract spec before production.",
+  "type": "object",
+  "required": ["schemaVersion", "policyId", "chainId", "owner", "beneficiaries", "assetCohorts", "triggers", "conflictResolution"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1.0-draft"
+    },
+    "policyId": {
+      "type": "string",
+      "description": "Human or deployment-specific id; may mirror on-chain bytes32 id."
+    },
+    "chainId": {
+      "type": "integer",
+      "description": "EVM chain id (eip-155 style)."
+    },
+    "owner": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$",
+      "description": "Policy author address (checksummed optional)."
+    },
+    "beneficiaries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "address"],
+        "properties": {
+          "id": { "type": "string" },
+          "address": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "assetCohorts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["cohortId", "kind"],
+        "properties": {
+          "cohortId": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": ["erc20", "erc721", "erc1155", "native"]
+          },
+          "token": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+          "tokenIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "distribution": {
+      "type": "array",
+      "description": "Maps cohort slices to beneficiaries; exact semantics versioning with schemaVersion.",
+      "items": {
+        "type": "object",
+        "required": ["cohortId", "beneficiaryId", "basisPoints"],
+        "properties": {
+          "cohortId": { "type": "string" },
+          "beneficiaryId": { "type": "string" },
+          "basisPoints": { "type": "integer", "minimum": 0, "maximum": 10000 }
+        }
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["triggerId", "type"],
+        "properties": {
+          "triggerId": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["time_deadline", "relative_delay", "inactivity", "attestation", "oracle_threshold", "multisig", "composite"]
+          },
+          "params": { "type": "object" },
+          "children": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "For composite: child trigger ids"
+          }
+        }
+      }
+    },
+    "conflictResolution": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["global_priority", "first_eligible_timestamp", "disjoint_cohorts"]
+        },
+        "priorityOrder": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "coolingOffSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "gasPolicy": {
+      "type": "object",
+      "properties": {
+        "minNativeReserveWei": { "type": "string" },
+        "maxBaseFeeWei": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}
