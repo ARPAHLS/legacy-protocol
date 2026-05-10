@@ -6,7 +6,7 @@ Maps product behaviours to the [reference spec](../arpa-legacy-protocol-referenc
 
 | ID | Behaviour | Ref | Status |
 |----|-----------|-----|--------|
-| B-001 | Policy root commit + monotonic version | §4.2, §10 | deferred |
+| B-001 | Policy root commit + monotonic version | §4.2, §10 | implemented *(skeleton)* |
 | B-002 | Revoke / amend policy only in allowed lifecycle states | §2, §10 | deferred |
 | B-003 | Time-based trigger arms and fires at configured boundary | §4.3 | deferred |
 | B-004 | Execute ERC-20 transfer to beneficiary per distribution | §4.4, §9 | deferred |
@@ -14,7 +14,7 @@ Maps product behaviours to the [reference spec](../arpa-legacy-protocol-referenc
 | B-006 | **Global priority** (+ tie-break) when two claims overlap | §5.2, [v1-mvp](../scope/v1-mvp.md), [ADR 001](../adr/001-v1-custody.md) | deferred |
 | B-007 | Replay-safe execution id / nonce (no double drain) | §15, §10 | deferred |
 | B-008 | Reentrancy resistance on external token callbacks | §4.4, §10 | deferred |
-| B-009 | Emit core lifecycle events per [events-v1](../indexing/events-v1.md) | §13 | deferred |
+| B-009 | Emit core lifecycle events per [events-v1](../indexing/events-v1.md) | §13 | implemented *(skeleton)* |
 
 ## Priority P1
 

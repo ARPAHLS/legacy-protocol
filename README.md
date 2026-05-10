@@ -47,9 +47,9 @@ What stays constant is sovereignty of intent before the storm. You set beneficia
 
 ## For builders
 
-Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), and non-canonical sketches ([`drafts/`](drafts/README.md)).
+Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), **initial Solidity v1 scaffolding** in [`contracts/`](contracts/), and non-canonical sketches ([`drafts/`](drafts/README.md)).
 
-Coming: Solidity contracts (Foundry layout planned), machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
+Coming next: Foundry project wiring, executable tests against the behavior matrix, machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
 
 Pull requests welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for norms.
 
@@ -71,7 +71,7 @@ Use **[CONTRIBUTING.md](CONTRIBUTING.md)** for pull requests and community norms
 
 1. **~~Freeze v1 custody model~~ → Done:** [ADR 001](docs/adr/001-v1-custody.md) **Accepted** — vault custody (path A), immutable v1 implementations, hybrid `execute` model. Next: mirror in `contracts/` (Foundry) and behavior tests.
 
-2. **Ship `contracts/`** — Foundry (or Hardhat) with unit and invariant tests mapped to behaviors in [`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md).
+2. **Bootstrap `contracts/` into executable build/tests** — wire Foundry (or Hardhat), then add unit and invariant tests mapped to behaviors in [`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md).
 
 3. **Authoring tooling** — policy manifests, CLI/SDK for commitments and regression fixtures.
 

@@ -1,6 +1,6 @@
 # Events and indexing (v1 draft)
 
-Candidate **event surface** for indexers, explorers, and wallets. Names and parameters are **draft** until Solidity exists; keep in sync with [reference §13](../arpa-legacy-protocol-reference.md#13-state-machine-outline-informative).
+Candidate **event surface** for indexers, explorers, and wallets. Names and parameters are **draft/iterating** while Solidity and tests evolve; keep in sync with [reference §13](../arpa-legacy-protocol-reference.md#13-state-machine-outline-informative) and `contracts/interfaces/ILegacyVaultEvents.sol`.
 
 ## Lifecycle events
 
@@ -32,4 +32,4 @@ Use **ERC-20 / ERC-721 Transfer** events from token contracts for double-entry s
 
 ## Changelog
 
-- **Draft** — align with first Foundry `LegacyVault` (or chosen module) implementation.
+- **Draft (partially implemented)** — aligned to initial `LegacyVaultV1` interface/events skeleton; refine as execution logic and tests land.
