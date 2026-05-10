@@ -1,14 +1,16 @@
 <div align="center">
 
   <img src="https://raw.githubusercontent.com/ARPAHLS/.github/main/legacy_gh_splash0.png" alt="Legacy Protocol logo" width="400px" />
+  <br />
+  <br />
 
 <p align="center"><strong>Programmable ownership that outlives you.</strong></p>
 
 <p align="center">Set rules now—time, dormancy, attestations, or committee votes—and smart contracts transfer your crypto, NFTs, vault keys, DIDs, or even sanctioned AI agents later. No lawyers, no rumors, no ledger scavengers. Just execution as locked, from inheritance to passive income to unstoppable treasury handoffs.</p>
 
-[![ARPA Hellenic Logical Systems](https://img.shields.io/badge/ARPA-Hellenic%20Logical%20Systems-B39DDB?labelColor=EDE7F6&style=flat)](https://github.com/arpahls)
+[![ARPA Hellenic Logical Systems](https://img.shields.io/badge/ARPA-Hellenic%20Logical%20Systems-A793AC?labelColor=dbd3dc&style=flat-square)](https://github.com/arpahls)
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-C5CAE9?labelColor=EDE7F6&style=flat)](LICENSE) [![docs contributing](https://img.shields.io/badge/docs-contributing-C5CAE9?labelColor=EDE7F6&style=flat)](CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-f0d9cc?labelColor=dbd3dc&style=flat-square)](LICENSE) [![docs contributing](https://img.shields.io/badge/docs-contributing-f0d9cc?labelColor=dbd3dc&style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
