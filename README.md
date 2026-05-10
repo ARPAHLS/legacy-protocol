@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>ARPA Legacy Protocol</h1>
+  <img src="https://raw.githubusercontent.com/ARPAHLS/.github/main/legacy_gh_splash0.png" alt="Legacy Protocol logo" width="400px" />
 
 <p align="center"><strong>Programmable ownership that outlives you.</strong></p>
 
