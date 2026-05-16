@@ -30,6 +30,7 @@ That's it. The same backbone handles inheritance, dormant treasuries, timed gift
 | Browse all technical docs (ADR, architecture, schemas, tests) | [**Documentation index**](docs/README.md) |
 | Understand the problem and design | [§ Rationale](#rationale), then [**Reference specification**](docs/arpa-legacy-protocol-reference.md) |
 | Contribute or propose changes | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Open design RFCs (discussion before dormancy / attestation code) | [#22–#25](https://github.com/ARPAHLS/legacy-protocol/issues/22) — see [For builders](#for-builders) |
 | Report a vulnerability | [SECURITY.md](SECURITY.md) |
 | See work in progress drafts | [`drafts/`](drafts/README.md) |
 
@@ -50,6 +51,17 @@ What stays constant is sovereignty of intent before the storm. You set beneficia
 ## For builders
 
 Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), **initial Solidity v1 scaffolding** in [`contracts/`](contracts/), and non-canonical sketches ([`drafts/`](drafts/README.md)).
+
+**v1 bytecode** targets **time-based triggers**, cooling-off hooks, and policy roots ([v1 MVP](docs/scope/v1-mvp.md)). Broader scenarios in the pitch (dormancy, attestations, guardian veto, composite predicates) need **normative decisions** first—we are discussing those in open GitHub RFC issues (labels: `question`, `help wanted`):
+
+| Topic | Issue |
+|--------|--------|
+| Cancel, liveness, and whether aborting a handoff resets long dormancy clocks | [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22) |
+| Shared veto/timelock core vs pluggable trigger adapters and policy profiles | [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23) |
+| Predicate composition and safe execution during the veto window | [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24) |
+| Guardian set representation and rotation | [#25](https://github.com/ARPAHLS/legacy-protocol/issues/25) |
+
+We lean toward **separate signals** (prove liveness, cancel current handoff, revoke policy) so a briefly compromised key cannot permanently freeze a handoff by spamming cancel—but that is **not final** until those issues close. Comment there if you care about the boundary.
 
 Coming next: Foundry project wiring, executable tests against the behavior matrix, machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
 

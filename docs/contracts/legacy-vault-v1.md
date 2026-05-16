@@ -70,6 +70,7 @@ See [events-v1.md](../indexing/events-v1.md).
 ## Open questions (track in ADR / drafts)
 
 - ~~Upgradeability~~ **v1:** **immutable implementation**; new versions are new deploys; users migrate explicitly—[ADR 001](../adr/001-v1-custody.md).
+- **Cancel / liveness / guardian veto** — [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22), [#25](https://github.com/ARPAHLS/legacy-protocol/issues/25); **adapters / profiles** — [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23); **predicate safety** — [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24).
 - Pull vs push payouts for malicious beneficiaries.
 - Executor **incentives** / tips ([reference §8](../arpa-legacy-protocol-reference.md#8-gas-and-economics)).
 

@@ -47,6 +47,7 @@ flowchart LR
 
 ## Related documents
 
+- **Open design RFCs (GitHub):** [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22)–[#25](https://github.com/ARPAHLS/legacy-protocol/issues/25) — cancel/liveness, adapters/profiles, predicates, guardians
 - [ADR 001: v1 custody](../adr/001-v1-custody.md)
 - [v1 MVP scope](../scope/v1-mvp.md)
 - [Trust boundaries v1](../security/trust-boundaries-v1.md)

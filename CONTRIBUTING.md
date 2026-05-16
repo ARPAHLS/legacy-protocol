@@ -15,6 +15,7 @@ Thank you for helping build **ARPA Legacy Protocol**. This work is stewarded by 
 | **Protocol narrative** | Edit [`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md); open a PR with a short rationale. |
 | **Implementation docs** | See [`docs/README.md`](docs/README.md); keep ADR / contract specs / schema in sync when behaviour changes. |
 | **Exploratory writes** | Start in [`drafts/`](drafts/README.md); fold into `docs/` when stable. |
+| **Design RFCs** | Discuss on GitHub issues [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22)–[#25](https://github.com/ARPAHLS/legacy-protocol/issues/25) before implementing dormancy, attestation, or guardian flows; record outcomes in a follow-up comment or doc PR when an RFC closes. |
 | **Smart contracts & tests** | Prefer small, focused PRs once `contracts/` exists; include tests and NatSpec aligned with behaviors described in docs. |
 | **Tooling / SDK** | Match layout and licensing of sibling packages under this repository root. |
 

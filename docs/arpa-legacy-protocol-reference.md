@@ -101,7 +101,7 @@ Watchers and bots **observe** eligibility and **submit** transactions; they **do
 
 ### 5.1 Predicate composition
 
-Eligibility is built from Boolean structure over primitive conditions (for example: at least one of several trigger groups, each group requiring all of its clauses).
+Eligibility is built from Boolean structure over primitive conditions (for example: at least one of several trigger groups, each group requiring all of its clauses). Composition grammar and execution safety during veto windows are under discussion in GitHub [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24).
 
 ### 5.2 Overlapping assets
 
@@ -120,6 +120,8 @@ Define **dust**, **skipped transfers**, and **blacklisted recipients**.
 ## 6. Cooling-off, accident mitigation, recovery
 
 For sensitive attestations, combine signals (for example attestation + dormancy + recovery veto). Document **revocation**, **key rotation**, interaction with **social recovery**, and any **pause** roles with clear capture risks.
+
+**Open normative work:** distinguish **prove liveness**, **cancel handoff**, and **revoke policy**, and whether cancel resets long-horizon dormancy clocks—see GitHub [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22) (related: [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23), [#25](https://github.com/ARPAHLS/legacy-protocol/issues/25)). Implementation of dormancy and attestation triggers should follow accepted outcomes there.
 
 ---
 
@@ -206,10 +208,14 @@ Illustrative events: `PolicyUpdated`, `TriggerSatisfied`, `ExecutionStarted`, `E
 ## 14. Open research and roadmap topics
 
 1. ~~Canonical **v1 custody** choice and upgrade story.~~ **Resolved:** [ADR 001](adr/001-v1-custody.md) — vault custody (path A), **immutable** v1 implementation; document supersession when path B ships.  
-2. **Inactivity** definition across EOA vs smart-account UX.  
-3. **Oracle adapter** surface for multi-chain deployments ([CAIP](https://github.com/ChainAgnostic/CAIPs)-style references if needed).  
-4. **Indexing** event schema for subgraphs and explorers.  
-5. **Upgrade patterns** beyond v1 immutable vaults (proxies, module registries)—only if future ADRs introduce them.
+2. **Cancel / liveness / handoff abort** — [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22).  
+3. **Pluggable triggers, policy profiles, shared veto core** — [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23).  
+4. **Predicate composition and safe queued execution** — [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24).  
+5. **Guardian set design and rotation** — [#25](https://github.com/ARPAHLS/legacy-protocol/issues/25).  
+6. **Inactivity** definition across EOA vs smart-account UX (blocked on #22 / #23).  
+7. **Oracle adapter** surface for multi-chain deployments ([CAIP](https://github.com/ChainAgnostic/CAIPs)-style references if needed).  
+8. **Indexing** event schema for subgraphs and explorers — [events-v1.md](indexing/events-v1.md) (draft).  
+9. **Upgrade patterns** beyond v1 immutable vaults (proxies, module registries)—only if future ADRs introduce them.
 
 ---
 

@@ -44,8 +44,8 @@ Per reference §9 deferred list:
 - Rebasing tokens, complex LP positions, malicious receiver grief NFTs without policy.
 - Bridged duplicate identity of same asset across chains without CAIP-aware spec.
 - KYC-gated RWA routers.
-- Full **inactivity counter** semantics across EOAs vs batched AA (requires ADR on “qualifying activity”).
-- Rich **oracle** and **attestation** stacks (interfaces may exist as stubs).
+- Full **inactivity counter** semantics across EOAs vs batched AA (requires outcomes on GitHub [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22), [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23)).
+- Rich **oracle** and **attestation** stacks (interfaces may exist as stubs; see [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23), [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24)).
 
 ## Out of scope (non-chain or product-legal)
 

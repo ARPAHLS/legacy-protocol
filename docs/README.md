@@ -14,5 +14,6 @@ Authoritative narrative spec: [**arpa-legacy-protocol-reference.md**](arpa-legac
 | Policy manifest (machine-readable) | [schemas/policy-manifest-draft.json](schemas/policy-manifest-draft.json) · [schemas/policy-manifest.md](schemas/policy-manifest.md) |
 | Behaviours ↔ tests | [testing/behavior-matrix.md](testing/behavior-matrix.md) |
 | Vault v1 contract spec (pre-code) | [contracts/legacy-vault-v1.md](contracts/legacy-vault-v1.md) |
+| **Open design RFCs** (GitHub; normative before dormancy/attestation) | [#22](https://github.com/ARPAHLS/legacy-protocol/issues/22) cancel/liveness · [#23](https://github.com/ARPAHLS/legacy-protocol/issues/23) adapters/profiles · [#24](https://github.com/ARPAHLS/legacy-protocol/issues/24) predicates · [#25](https://github.com/ARPAHLS/legacy-protocol/issues/25) guardians |
 
 Pre-decision sketches live under **[`../drafts/`](../drafts/README.md)**.
