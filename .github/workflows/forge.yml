@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  FOUNDRY_PROFILE: ci
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,9 +18,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.foundry
-          key: foundry-${{ runner.os }}
+          key: foundry-${{ runner.os }}-v1
           restore-keys: |
-            foundry-${{ runner.os }}
+            foundry-${{ runner.os }}-
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
