@@ -1,0 +1,34 @@
+name: Forge
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Foundry
+        id: cache-foundry
+        uses: actions/cache@v4
+        with:
+          path: ~/.foundry
+          key: foundry-${{ runner.os }}-v1
+          restore-keys: |
+            foundry-${{ runner.os }}-
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Forge build
+        run: forge build
+
+      - name: Forge test
+        run: forge test
