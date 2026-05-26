@@ -1,0 +1,56 @@
+name: Foundry CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  FOUNDRY_PROFILE: ci
+  # Pin specific Foundry nightly toolchain for reproducibility
+  FOUNDRY_TOOLCHAIN_VERSION: nightly-1a8f1c8c52570a1e3cde81ff32be51515c5bc6ba
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: ${{ env.FOUNDRY_TOOLCHAIN_VERSION }}
+
+      - name: Show forge version
+        run: forge --version
+
+      - name: Cache Foundry dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            lib/
+            out/
+            cache/
+          key: ${{ runner.os }}-forge-deps-${{ hashFiles('**/foundry.toml', '**/remappings.txt', 'lib/**') }}
+          restore-keys: |
+            ${{ runner.os }}-forge-deps-
+
+      - name: Run Forge build
+        run: |
+          forge build --via-ir --sizes
+        id: build
+
+      - name: Run Forge tests (with gas report)
+        run: |
+          forge test --via-ir --gas-report -vvv
+        id: test
+
+      - name: Check formatting
+        run: |
+          forge fmt --check
+        id: fmt-check
