@@ -51,7 +51,7 @@ Align with [reference §13](../arpa-legacy-protocol-reference.md#13-state-machin
 |----------|--------|
 | `commitPolicy(...)` | Stores `policyRoot`, bumps `version`, emits `PolicyCommitted` |
 | `revokePolicy(bytes32 policyId)` | Emits `PolicyRevoked`; blocks new execution |
-| `armTrigger(...)` | v1: associate time trigger with `policyId` |
+| `armTrigger(...)` | v1: associate time trigger with `policyId`; sets `executeAfter = eligibleAt + coolingOffSeconds`; emits `TriggerArmed` and `CoolingOffStarted` (always, including zero cooling-off) |
 | `markEligible(...)` | Optional: if trigger is external module, callback or oracle |
 | `execute(bytes32 policyId, bytes calldata envelope, uint256 batchIndex)` | Verifies envelope matches committed `policyRoot`; checks trigger + cooling-off + caller role; transfers assets; idempotent batch index |
 

@@ -10,7 +10,7 @@ Candidate **event surface** for indexers, explorers, and wallets. Names and para
 | `PolicyRevoked` | Policy voided | `policyId`, `version` |
 | `TriggerArmed` | Policy moves to armed / watching | `policyId`, `triggerSetId` |
 | `TriggerSatisfied` | Predicate set satisfied (may be provisional) | `policyId`, `triggerId`, `evidenceHash` |
-| `CoolingOffStarted` | Optional delay before execution | `policyId`, `executeAfter` |
+| `CoolingOffStarted` | Emitted on every `armTrigger`, including zero-length cooling-off windows; `executeAfter = eligibleAt + coolingOffSeconds` | `policyId`, `executeAfter` |
 | `ExecutionStarted` | First transfer batch | `policyId`, `executionId` |
 | `ExecutionPartial` | Batch completed; more remain | `policyId`, `executionId`, `nonce` |
 | `ExecutionCompleted` | Terminal success | `policyId`, `executionId` |
@@ -32,4 +32,5 @@ Use **ERC-20 / ERC-721 Transfer** events from token contracts for double-entry s
 
 ## Changelog
 
+- **B-013 (#9)** — `CoolingOffStarted` is now emitted consistently for **zero and non-zero** cooling-off windows; payload always reports the stored `executeAfter`.
 - **Draft (partially implemented)** — aligned to initial `LegacyVaultV1` interface/events skeleton; refine as execution logic and tests land.

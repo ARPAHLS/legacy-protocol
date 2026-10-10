@@ -70,7 +70,7 @@ contract LegacyVaultV1 is ILegacyVaultV1 {
         policy.executeAfter = eligibleAt + coolingOffSeconds;
 
         emit TriggerArmed(policyId, triggerSetId, eligibleAt);
-        if (coolingOffSeconds > 0) emit CoolingOffStarted(policyId, policy.executeAfter);
+        emit CoolingOffStarted(policyId, policy.executeAfter);
     }
 
     function markEligible(bytes32 policyId, bytes32 triggerId, bytes32 evidenceHash) external override {

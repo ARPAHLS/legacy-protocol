@@ -23,7 +23,7 @@ Maps product behaviours to the [reference spec](../arpa-legacy-protocol-referenc
 | B-010 | Staged / partial execution with resumable batches | §3.6, §13 | deferred |
 | B-011 | Native token gas reserve policy | §8 | deferred |
 | B-012 | ERC-1155 batch semantics | §9 | deferred |
-| B-013 | Cooling-off window after trigger satisfied | §2, §6 | deferred |
+| B-013 | Cooling-off window after trigger satisfied | §2, §6 | tested *(B-013 suite, zero + non-zero windows)* |
 
 ## Priority P2 (post-v1)
 

@@ -50,7 +50,7 @@ What stays constant is sovereignty of intent before the storm. You set beneficia
 
 ## For builders
 
-Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), **initial Solidity v1 scaffolding** in [`contracts/`](contracts/), and non-canonical sketches ([`drafts/`](drafts/README.md)).
+Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-legacy-protocol-reference.md)), structured implementation docs ([`docs/README.md`](docs/README.md): **Accepted** ADR 001, architecture, MVP scope, ideal-vs-MVP asset coverage, events, policy JSON schema, behaviour matrix, vault spec), **initial Solidity v1 scaffolding** in [`contracts/`](contracts/) with **Foundry build/test wiring** (cooling-off behaviour matrix B-013 covered), and non-canonical sketches ([`drafts/`](drafts/README.md)).
 
 **v1 bytecode** targets **time-based triggers**, cooling-off hooks, and policy roots ([v1 MVP](docs/scope/v1-mvp.md)). Broader scenarios in the pitch (dormancy, attestations, guardian veto, composite predicates) need **normative decisions** first—we are discussing those in open GitHub RFC issues (labels: `question`, `help wanted`):
 
@@ -63,7 +63,7 @@ Today: reference spec ([`docs/arpa-legacy-protocol-reference.md`](docs/arpa-lega
 
 We lean toward **separate signals** (prove liveness, cancel current handoff, revoke policy) so a briefly compromised key cannot permanently freeze a handoff by spamming cancel—but that is **not final** until those issues close. Comment there if you care about the boundary.
 
-Coming next: Foundry project wiring, executable tests against the behavior matrix, machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
+Coming next: broader executable tests against the behavior matrix (Foundry is wired; B-013 cooling-off covered), machine-readable policy manifests, and an SDK for encoding commitments and integration proofs.
 
 Pull requests welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for norms.
 
@@ -102,6 +102,13 @@ Use **[CONTRIBUTING.md](CONTRIBUTING.md)** for pull requests and community norms
 ```powershell
 git clone https://github.com/arpahls/legacy-protocol.git
 cd legacy-protocol
+```
+
+**Contracts (requires [Foundry](https://getfoundry.sh)):**
+
+```powershell
+forge build
+forge test
 ```
 
 **Track remote and publish** (adapt paths if your checkout lives elsewhere):
